@@ -1,4 +1,4 @@
-#include <arduino.h>
+#include <Arduino.h>
 #define PIN_LED 7
 
 void setup()
