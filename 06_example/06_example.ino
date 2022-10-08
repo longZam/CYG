@@ -10,7 +10,7 @@ void setup()
     pinMode(PIN7, OUTPUT);
     accumulator = 0;
 
-    Serial.begin(112500);
+    Serial.begin(115200);
 }
 
 void loop()
