@@ -89,7 +89,20 @@ void loop()
     dist_queue->Enqueue(dist);
   }
 
-  qsort(dist_sort_cache, DIST_QUEUE_N, sizeof(float), compare);
+  // qsort(dist_sort_cache, DIST_QUEUE_N, sizeof(float), compare);
+
+  qsort(dist_sort_cache, DIST_QUEUE_N, sizeof(float), [](const void *a, const void *b)
+  {
+      float fa = *(const float *)a;
+      float fb = *(const float *)b;
+      
+      if (fa > fb) 
+        return 1;
+      else if (fa < fb)
+        return -1;
+      else
+        return 0;
+  });
 
   float dist_median = dist_sort_cache[DIST_QUEUE_N / 2 + 1];
 
@@ -109,12 +122,12 @@ void loop()
   last_sampling_time += INTERVAL;
 }
 
-int compare(const void *a, const void *b)
-{
-  float fa = *(const float *)a;
-  float fb = *(const float *)b;
-  return (fa > fb) - (fa < fb);
-}
+// int compare(const void *a, const void *b)
+// {
+//   float fa = *(const float *)a;
+//   float fb = *(const float *)b;
+//   return (fa > fb) - (fa < fb);
+// }
 
 // get a distance reading from USS. return value is in millimeter.
 float USS_measure(int TRIG, int ECHO)
